@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Daftar - Peminjaman Barang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style/login.css"/>
+</head>
+<body>
+
+<div class="container">
+  <div class="icon-top">🏠</div>
+  <h2>Web Peminjaman Barang Rumah Tangga</h2>
+  <div class="tab">
+    <button onclick="showForm('formLogin')" id="btnLogin" class="active">Login</button>
+    <button onclick="showForm('daftar')" id="btnDaftar">Daftar</button>
+  </div>
+
+  <!-- Form Login -->
+  <form id="formLogin">
+  <input type="text" name="usernameOrEmail" placeholder="Email / Username" required />
+  <input type="password" name="password" placeholder="Password" required />
+  <button type="submit">Login</button>
+  </form>
+
+
+
+  <!-- Form Daftar -->
+  <!-- Form Daftar -->
+<form id="formDaftar">
+  <select name="role" required>
+    <option value="">-- Pilih Role --</option>
+    <option value="peminjam">Peminjam</option>
+    <option value="penyedia">Penyedia</option>
+  </select> <!-- <- INI HARUS ADA -->
+
+  <input type="text" name="name" placeholder="Nama" required />
+  <input type="text" name="phone" placeholder="No HP" required />
+  <input type="text" name="address" placeholder="Alamat" required />
+  <input type="text" name="nik" placeholder="NIK (untuk peminjam)" />
+  <input type="email" name="email" placeholder="Email" required />
+  <input type="text" name="username" placeholder="Username" required />
+  <input type="password" name="password" placeholder="Password" required />
+  
+  <button type="submit">Register</button>
+</form>
+
+ <script>
+    function showForm(form) {
+      document.getElementById("formLogin").classList.toggle("hidden", form !== "login");
+      document.getElementById("formDaftar").classList.toggle("hidden", form !== "daftar");
+      document.getElementById("btnLogin").classList.toggle("active", form === "login");
+      document.getElementById("btnDaftar").classList.toggle("active", form === "daftar");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("btnLogin").addEventListener("click", () => showForm("login"));
+      document.getElementById("btnDaftar").addEventListener("click", () => showForm("daftar"));
+      showForm("login");
+    });
+    
+  </script>
+<script src="./script/main.js" defer></script>
+</body>
+</html>

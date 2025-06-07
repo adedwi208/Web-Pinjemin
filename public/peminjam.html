@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Beranda Peminjam</title>
+  <link rel="stylesheet" href="./style/peminjam.css"/>
+</head>
+
+<body onload="initPage()">
+
+  <header>
+    <h2 id="greeting">Selamat Datang</h2>
+    <p id="usernameDisplay"></p>
+  </header>
+
+  <div class="sidebar">
+    <button onclick="filterDeskripsi('perkakas')">📦 Perkakas</button>
+    <button onclick="filterDeskripsi('elektronik')">💡 Barang Elektronik</button>
+    <button onclick="tampilkanBarangDipinjam()">📋 Barang Dipinjam</button>
+    <button onclick="kembaliKeBeranda()">🏠 Beranda Utama</button>
+    <button class="logout" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <!-- <div class="main-content">
+    <iframe id="itemFrame" srcdoc="<p style='padding:20px;'>Silakan pilih kategori dari menu di kiri.</p>"></iframe>
+  </div>
+</div> -->
+
+<div class="main-content">
+  <div id="barangContainer" class="items"></div>
+</div>
+
+<div id="invoiceModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:1000; padding:20px; overflow:auto;">
+  <div id="invoiceContent" style="max-width:600px; margin:auto; border:1px solid #ccc; padding:20px; background:white;">
+    <h2>Invoice Peminjaman</h2>
+    <div id="invoiceBody"></div>
+    <br />
+    <button onclick="window.print()">🖨️ Cetak Invoice</button>
+    <button onclick="tutupInvoice()">❌ Tutup</button>
+  </div>
+</div>
+
+
+
+
+  <script src="./script/peminjam.js"></script>
+
+</body>
+</html>

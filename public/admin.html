@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="./style/admin.css"/>
+</head>
+<body onload="initPage()">
+
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="#" onclick="loadContent('pengguna')">Kelola Pengguna</a>
+    <a href="#" onclick="loadContent('barang')">Kelola Barang</a>
+    <a href="#" onclick="loadContent('laporan')">Laporan</a>
+    <button onclick="logout()">Logout</button>
+    <button onclick="kembaliKeBeranda()">🏠 Beranda Utama</button>
+  </div>
+
+  <div class="main">
+    <header id="greetingHeader">Selamat datang, Admin!</header>
+    <iframe id="contentFrame" srcdoc="<h3 style='text-align:center; padding-top: 50px;'>Silakan pilih menu di sebelah kiri</h3>"></iframe>
+  </div>
+
+  <script>
+  function initPage() {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      alert("Anda tidak punya akses ke halaman admin.");
+      window.location.href = "login.html";
+    }
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+  }
+
+  function kembaliKeBeranda() {
+    window.location.href = "index.html";
+  }
+
+  
+
+</script>
+
+  
+  <script src="./script/main.js"></script>
+
+</body>
+</html>

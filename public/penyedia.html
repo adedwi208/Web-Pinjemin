@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Beranda Penyedia</title>
+  <link rel="stylesheet" href="./style/penyedia.css"/>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body onload="loadData()">
+
+  <div class="sidebar">
+    <h2 id="greeting"></h2>
+    <p id="usernameDisplay"></p>
+
+    <h3>Cari Barang</h3>
+    <input type="text" id="searchInput" placeholder="Masukkan nama barang..." oninput="searchBarang()">
+
+    <h3>Tambah Barang</h3>
+    <input type="text" id="itemName" placeholder="Nama Barang" />
+    <textarea id="itemDesc" placeholder="Deskripsi Barang"></textarea>
+    <input type="number" id="itemQty" placeholder="Jumlah Barang" />
+    <input type="file" id="itemImage" accept="image/*" />
+    <button onclick="tambahBarang()">Tambah Barang</button>
+    <button onclick="lihatPinjaman()">📋 Lihat Barang yang Dipinjam</button>
+    
+
+    <button onclick="kembaliKeBeranda()">🏠 Beranda Utama</button>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="content">
+    <iframe id="frameBarang" srcdoc="<p style='padding:20px;'>Barang yang Anda tambahkan akan muncul di sini.</p>"></iframe>
+  </div>
+
+  <div id="barangContainer" style="padding: 20px;"></div>
+
+
+<script src="./script/penyedia.js"></script>
+
+</body>
+</html>

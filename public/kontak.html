@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontak Kami</title>
+ <link rel="stylesheet" href="./style/kontak.css"/>
+</head>
+<body>
+
+  <header>
+    <h1>Kontak Kami</h1>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="tentang.html">Tentang</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Hubungi Kami</h2>
+    <p>Jika Anda memiliki pertanyaan atau masukan, silakan isi formulir di bawah ini:</p>
+
+    <form onsubmit="alert('Pesan berhasil dikirim!'); return false;">
+      <label for="nama">Nama</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="pesan">Pesan</label>
+      <textarea id="pesan" name="pesan" rows="5" required></textarea>
+
+      <button type="submit">Kirim Pesan</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Peminjaman Barang Rumah Tangga
+  </footer>
+<script src="/project-1/public/script/main.js"></script>
+</body>
+</html>

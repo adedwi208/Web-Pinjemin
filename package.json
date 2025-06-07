@@ -1,0 +1,33 @@
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "Proyek Node.js untuk sistem peminjaman barang",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.0",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adedwi208/my-web.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/adedwi208/my-web/issues"
+  },
+  "homepage": "https://github.com/adedwi208/my-web#readme"
+}

@@ -1,0 +1,123 @@
+/* Reset dasar */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #d0f0c0, #fefae0);
+  margin: 0;
+  padding: 0;
+}
+
+/* Container utama */
+.container {
+  max-width: 500px;
+  margin: 60px auto;
+  background: url('../assets/background-login.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* Lapisan gelap agar teks tetap terbaca */
+  z-index: 0;
+  border-radius: 12px;
+}
+
+.container > * {
+  position: relative;
+  z-index: 1;
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/* Tab tombol login / daftar */
+.tab {
+  display: flex;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tab button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  background: #e0e0e0;
+  font-weight: bold;
+  transition: background 0.3s;
+  color: #333;
+}
+
+.tab button.active {
+  background: #34495e;
+  color: white;
+}
+
+/* Form Login dan Daftar */
+form {
+  display: none;
+  flex-direction: column;
+  gap: 50px; /* Jarak antar elemen input */
+}
+
+form.active {
+  display: flex;
+}
+
+/* Input dan Select */
+select,
+input {
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%; /* Memenuhi lebar form */
+  margin: 2px;
+}
+
+/* Tombol submit */
+form button[type="submit"],
+button.submit {
+  background-color: #34495e;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%; /* Tombol penuh */
+  font-size: 16px;
+}
+
+form button[type="submit"]:hover,
+button.submit:hover {
+  background-color: #45a049;
+}
+
+/* Grup Role login (jika digunakan) */
+#roleLoginGroup {
+  display: block;
+}
+
+/* Ikon di atas form */
+.icon-top {
+  text-align: center;
+  font-size: 60px;
+  color: #34495e;
+  margin-bottom: 15px;
+}
