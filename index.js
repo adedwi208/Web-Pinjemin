@@ -1,8 +1,14 @@
   require('dotenv').config();
   const express = require('express');
   const cors = require('cors');
+  const cron = require('node-cron');
+  const pinjamController = require('./backend/controllers/pinjamcontroller');
+  const db = require('./backend/models/db');
   const path = require('path');
   const fs = require('fs');
+
+  // console.log("Aplikasi dimulai.");
+  // console.log("Mencoba menjadwalkan tugas cron...");
 
   const authRoutes = require('./backend/routers/authrouters');
   const barangRoutes = require('./backend/routers/barang');
@@ -13,6 +19,12 @@
 
   const app = express();
   const PORT = process.env.PORT || 3000;
+
+  cron.schedule('*/1 * * * *', () => {
+    // console.log('Tugas cron dipicu: ' + new Date().toLocaleTimeString()); // Dinonaktifkan
+    pinjamController.checkAndSendOverdueNotifications(); // Memanggil fungsi pengecekan notifikasi
+  });
+  // console.log("Tugas cron berhasil dijadwalkan.");
 
   app.use(cors());
   app.use(express.json());

@@ -13,29 +13,25 @@
   <div class="icon-top">🏠</div>
   <h2>Web Peminjaman Barang Rumah Tangga</h2>
   <div class="tab">
-    <button onclick="showForm('formLogin')" id="btnLogin" class="active">Login</button>
+    <button onclick="showForm('login')" id="btnLogin" class="active">Login</button>
     <button onclick="showForm('daftar')" id="btnDaftar">Daftar</button>
   </div>
 
-  <!-- Form Login -->
   <form id="formLogin">
   <input type="text" name="usernameOrEmail" placeholder="Email / Username" required />
   <input type="password" name="password" placeholder="Password" required />
   <button type="submit">Login</button>
+  <a href="index.html" class="back-to-home">Kembali ke Beranda Utama</a>
   </form>
 
 
 
-  <!-- Form Daftar -->
-  <!-- Form Daftar -->
-<form id="formDaftar">
+  <form id="formDaftar">
   <select name="role" required>
     <option value="">-- Pilih Role --</option>
     <option value="peminjam">Peminjam</option>
     <option value="penyedia">Penyedia</option>
-  </select> <!-- <- INI HARUS ADA -->
-
-  <input type="text" name="name" placeholder="Nama" required />
+  </select> <input type="text" name="name" placeholder="Nama" required />
   <input type="text" name="phone" placeholder="No HP" required />
   <input type="text" name="address" placeholder="Alamat" required />
   <input type="text" name="nik" placeholder="NIK (untuk peminjam)" />
@@ -52,12 +48,18 @@
       document.getElementById("formDaftar").classList.toggle("hidden", form !== "daftar");
       document.getElementById("btnLogin").classList.toggle("active", form === "login");
       document.getElementById("btnDaftar").classList.toggle("active", form === "daftar");
+
+      // Menampilkan atau menyembunyikan link "Kembali ke Beranda Utama"
+      const backToHomeLink = document.querySelector("#formLogin .back-to-home");
+      if (backToHomeLink) {
+        backToHomeLink.style.display = (form === "login") ? "block" : "none";
+      }
     }
 
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("btnLogin").addEventListener("click", () => showForm("login"));
       document.getElementById("btnDaftar").addEventListener("click", () => showForm("daftar"));
-      showForm("login");
+      showForm("login"); // Pastikan form login aktif saat halaman dimuat
     });
     
   </script>

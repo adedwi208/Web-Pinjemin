@@ -1,11 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const adminController = require('../controllers/adminController');
+const router = express.Router(); // Define a new router instance
+const adminController = require('../controllers/adminController'); // Ensure the path is correct
 
+// 1. Ambil semua user
 router.get('/pengguna', adminController.getAllUsers);
-router.get('/barang', adminController.getAllBarangWithPenyedia);
-router.get('/laporan', adminController.getLaporanPeminjaman);
-router.delete('/pengguna/:id', adminController.hapusPengguna);
-router.put('/pengguna/:id', adminController.editPengguna);
 
-module.exports = router;
+// 2. Ambil semua barang + nama penyedianya
+router.get('/barang', adminController.getAllBarangWithPenyedia);
+
+// 3. Ambil riwayat peminjaman
+router.get('/laporan', adminController.getLaporanPeminjaman);
+
+module.exports = router; // Export the router

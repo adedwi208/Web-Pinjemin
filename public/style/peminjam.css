@@ -173,3 +173,134 @@
     display: none;
   }
 }
+
+/* General styling for the body to ensure a clean slate */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Container for all displayed items - menggantikan .items */
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Lebih lebar dari 250px */
+    gap: 20px; /* Lebih besar dari 1.5rem */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px; /* Lebih halus */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Lebih tebal */
+    height: auto; /* Biarkan konten menentukan tinggi */
+    overflow-y: visible; /* Biarkan konten menentukan scroll */
+}
+
+/* Styling for individual item cards - menggantikan .item */
+.item-card {
+    background-color: #fff;
+    padding: 1.5rem; /* Padding lebih besar */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* Lebih halus */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Efek hover */
+    border: 1px solid #e0e0e0; /* Border halus */
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.item-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.8rem; /* Margin lebih besar */
+}
+
+.item-card h3 {
+    font-size: 1.3rem; /* Lebih besar */
+    margin: 0.5rem 0;
+    color: #2c3e50; /* Warna lebih gelap */
+    font-weight: 600; /* Lebih tebal */
+}
+
+.item-card p {
+    font-size: 0.95em; /* Sedikit lebih besar */
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.item-card p strong {
+    color: #333;
+}
+
+/* Specific styling for 'status' or 'borrowed date' if they exist */
+.item-status {
+    font-weight: 600;
+    color: #28a745; /* Green for active status */
+}
+
+.item-date {
+    font-style: italic;
+    color: #777;
+}
+
+.item-button {
+    background-color: #007bff; /* Biru yang lebih umum */
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem; /* Padding lebih besar */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem; /* Margin lebih besar */
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.item-button:hover:not(:disabled) {
+    background-color: #0056b3; /* Biru yang lebih gelap saat hover */
+}
+
+.item-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+label {
+    display: block;
+    margin-top: 0.8rem; /* Margin lebih besar */
+    font-size: 0.9rem;
+    color: #444;
+}
+
+input[type="date"] {
+    margin-left: 0.5rem;
+    padding: 5px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .items-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .items-container {
+        grid-template-columns: 1fr; /* Stack items vertically on small screens */
+        padding: 10px;
+    }
+    .item-card {
+        padding: 15px;
+    }
+}

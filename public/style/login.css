@@ -1,3 +1,5 @@
+/* style/login.css */
+
 /* Reset dasar */
 * {
   box-sizing: border-box;
@@ -120,4 +122,37 @@ button.submit:hover {
   font-size: 60px;
   color: #34495e;
   margin-bottom: 15px;
+}
+
+/* --- Gaya untuk Link Kembali ke Beranda Utama (tambahan baru) --- */
+#formLogin .back-to-home {
+  display: block; /* Agar link menempati baris sendiri dan bisa diatur margin/text-align */
+  text-align: center; /* Pusatkan teks link */
+  margin-top: 20px; /* Jarak dari tombol "Login" di atasnya */
+  color: #fff; /* Warna teks putih agar kontras dengan background gelap */
+  font-size: 14px; /* Ukuran font sesuai dengan elemen lain */
+  text-decoration: none; /* Hilangkan garis bawah default */
+  opacity: 0.8; /* Sedikit transparan untuk efek visual */
+  transition: opacity 0.3s ease, color 0.3s ease; /* Transisi halus saat hover */
+}
+
+#formLogin .back-to-home:hover {
+  opacity: 1; /* Lebih terang saat di-hover */
+  color: #aaffaa; /* Ubah warna saat di-hover, contoh: hijau muda */
+  text-decoration: underline; /* Munculkan garis bawah saat di-hover */
+}
+
+/* Menyesuaikan jarak antar elemen dalam form agar tidak terlalu renggang jika gap 50px terlalu besar */
+/* Ini adalah saran, sesuaikan jika Anda ingin tetap dengan gap 50px */
+#formLogin {
+  gap: 15px; /* Kurangi jarak antar elemen input dan tombol untuk form login */
+}
+
+#formDaftar {
+  gap: 10px; /* Kurangi jarak antar elemen untuk form daftar jika diperlukan */
+}
+
+/* Tambahan: Pastikan select juga memiliki margin yang konsisten */
+select {
+    margin-bottom: 10px; /* Atau sesuai dengan gap yang Anda inginkan */
 }

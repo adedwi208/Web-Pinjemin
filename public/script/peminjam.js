@@ -36,74 +36,25 @@ function tampilkanKategori(kategori) {
 
 
   // Bangun HTML untuk daftar barang
+  // Bangun HTML untuk daftar barang
   const html = `
-  <style>
-    .items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: white;
-      height: 100%;
-      overflow-y: auto;
-    }
-    .item {
-      background-color: #fff;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-    }
-    .item h3 {
-      font-size: 1.1rem;
-      margin: 0.5rem 0;
-      color: #4CAF50;
-    }
-    .item button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: auto;
-    }
-    .item button:hover {
-      background-color: #45a049;
-    }
-  </style>
-
-  <div class="items">
+  <div class="items-container">
     ${
       hasil.length
         ? hasil.map(item => `
-            <div class="item">
+            <div class="item-card">
               <img src="${getImageUrl(item.nama_barang)}" alt="${item.nama_barang}">
               <h3>${item.nama_barang}</h3>
               <p>${item.deskripsi}</p>
               <p>Disediakan oleh: <strong>${item.nama_penyedia || 'Tidak diketahui'}</strong></p>
-              <button onclick="alert('Pinjam ${item.nama_barang}')">Pinjam Sekarang</button>
+              <button class="item-button" onclick="alert('Pinjam ${item.nama_barang}')">Pinjam Sekarang</button>
             </div>
           `).join('')
         : '<p style="padding:20px;">Tidak ada barang.</p>'
     }
   </div>
 `;
-
-
   document.getElementById("barangContainer").innerHTML = html;
-
 }
 
 
@@ -115,56 +66,11 @@ function filterDeskripsi(keyword) {
   renderBarang(hasil);
 
   const html = `
-  <style>
-  .items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: white;
-      height: 100%;
-      overflow-y: auto;
-    }
-    .item {
-      background-color: #fff;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-    }
-    .item h3 {
-      font-size: 1.1rem;
-      margin: 0.5rem 0;
-      color: #4CAF50;
-    }
-    .item button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: auto;
-    }
-    .item button:hover {
-      background-color: #45a049;
-    }/</style>
-  <div class="items">
+  <div class="items-container">
     ${
       hasil.length
         ? hasil.map(item => `
-            <div class="item">
+            <div class="item-card">
               <img src="${item.foto ? '/uploads/' + item.foto : 'https://via.placeholder.com/150'}" alt="${item.nama_barang}">
               <h3>${item.nama_barang}</h3>
               <p>${item.deskripsi}</p>
@@ -172,18 +78,15 @@ function filterDeskripsi(keyword) {
               <label>Tanggal Mulai: <input type="date" id="start-${item.id}"></label>
               <label>Tanggal Selesai: <input type="date" id="end-${item.id}"></label>
               ${item.jumlah > 0
-              ? `<button onclick="pinjamBarang(${item.id})">Pinjam Sekarang</button>`
-              : `<button disabled style="background: #ccc; cursor: not-allowed;">Tidak Tersedia</button>`}
-
+              ? `<button class="item-button" onclick="pinjamBarang(${item.id})">Pinjam Sekarang</button>`
+              : `<button class="item-button" disabled>Tidak Tersedia</button>`}
             </div>
           `).join('')
         : '<p style="padding:20px;">Tidak ada barang yang cocok.</p>'
     }
   </div>
   `;
-
   document.getElementById("barangContainer").innerHTML = html;
-
 }
 
 
@@ -219,16 +122,26 @@ function pinjamBarang(id) {
   const tanggal_mulai = document.getElementById(`start-${id}`).value;
   const tanggal_selesai = document.getElementById(`end-${id}`).value;
 
+  // Validasi Tanggal di sisi klien
+  if (!tanggal_mulai || !tanggal_selesai) {
+    alert("Tanggal mulai dan tanggal selesai harus diisi!");
+    return; // Menghentikan eksekusi jika tanggal kosong
+  }
+
+  // Mengubah operator '<' menjadi '<=' untuk memastikan tanggal selesai harus LEBIH BESAR
+  // Jika tanggal selesai sama dengan atau lebih kecil dari tanggal mulai, maka tidak valid.
   if (new Date(tanggal_selesai) <= new Date(tanggal_mulai)) {
-  alert("Tanggal selesai harus lebih besar dari tanggal mulai!");
-  return;
-}
+    alert("Tanggal selesai harus lebih besar dari tanggal mulai!");
+    return; // Menghentikan eksekusi fungsi jika validasi gagal
+  }
 
   fetch('/api/pinjam', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user: username, barang_id: id, tanggal_mulai, tanggal_selesai })
   })
+  
+  
   .then(res => res.json()) // parsing response JSON dulu
   .then(data => {
     if (data.message === 'Peminjaman berhasil!') {
@@ -325,87 +238,25 @@ function renderBarang(items, mode = 'semua') {
   const username = localStorage.getItem("username");
 
   // CSS styling untuk kartu barang, cukup sekali saja, jadi pindahkan di luar fungsi kalau mau optimasi
-  const style = `
-  <style>
-    .items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: white;
-      height: 100%;
-      overflow-y: auto;
-    }
-    .item {
-      background-color: #fff;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-    }
-    .item h3 {
-      font-size: 1.1rem;
-      margin: 0.5rem 0;
-      color: #4CAF50;
-    }
-    .item button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 0.5rem;
-    }
-    .item button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
-    .item button:hover:not(:disabled) {
-      background-color: #45a049;
-    }
-    label {
-      display: block;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-    }
-    input[type="date"] {
-      margin-left: 0.5rem;
-    }
-  </style>
-  `;
-
   const html = `
-    ${style}
-    <div class="items">
+    <div class="items-container">
       ${items.map(item => {
         const sedangDipinjamOlehUser = item.status === 'dipinjam' && item.peminjam_username === username;
 
         return `
-          <div class="item">
+          <div class="item-card">
             <img src="${item.foto ? '/uploads/' + item.foto : 'https://via.placeholder.com/250x180?text=No+Image'}">
             <h3>${item.nama_barang}</h3>
             <p>${item.deskripsi}</p>
             <p>Disediakan oleh: <strong>${item.nama_penyedia || 'Tidak diketahui'}</strong></p>
             ${mode === 'dipinjam' && sedangDipinjamOlehUser
-              ? `<button onclick="kembalikanBarang(this)" data-barang_id="${item.barang_id}" data-pinjaman_id="${item.pinjaman_id}">Kembalikan</button>`
+              ? `<button class="item-button" onclick="kembalikanBarang(this)" data-barang_id="${item.barang_id}" data-pinjaman_id="${item.pinjaman_id}">Kembalikan</button>`
               : `
                 <label>Tanggal Mulai: <input type="date" id="start-${item.id}"></label>
                 <label>Tanggal Selesai: <input type="date" id="end-${item.id}"></label>
                 ${item.jumlah > 0
-                  ? `<button onclick="pinjamBarang(${item.id})">Pinjam Sekarang</button>`
-                  : `<button disabled>Tidak Tersedia</button>`}
+                  ? `<button class="item-button" onclick="pinjamBarang(${item.id})">Pinjam Sekarang</button>`
+                  : `<button class="item-button" disabled>Tidak Tersedia</button>`} 
               `}
           </div>
         `;
