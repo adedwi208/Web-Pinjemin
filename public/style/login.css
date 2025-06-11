@@ -108,7 +108,7 @@ button.submit {
 
 form button[type="submit"]:hover,
 button.submit:hover {
-  background-color: #45a049;
+  background-color: #0e6987;
 }
 
 /* Grup Role login (jika digunakan) */
@@ -138,7 +138,7 @@ button.submit:hover {
 
 #formLogin .back-to-home:hover {
   opacity: 1; /* Lebih terang saat di-hover */
-  color: #aaffaa; /* Ubah warna saat di-hover, contoh: hijau muda */
+  color: #0e6987; /* Ubah warna saat di-hover, contoh: hijau muda */
   text-decoration: underline; /* Munculkan garis bawah saat di-hover */
 }
 

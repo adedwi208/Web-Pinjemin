@@ -1,58 +1,136 @@
-body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
+/* Struktur Umum Halaman */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f9;
+  display: flex;
+  flex-direction: column;
+}
 
-    header, footer {
-      background-color: #34495e;
-      color: white;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
+/* Header & Footer */
+header, footer {
+  background-color: #34495e;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
-    }
+footer {
+  margin-top: auto;
+  font-size: 0.95rem;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
+/* Navigasi */
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
 
-    h2 {
-      color: #34495e;
-      margin-bottom: 1rem;
-    }
+nav a:hover {
+  color: #1abc9c;
+}
 
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
+/* Container Utama */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeSlideIn 0.8s ease;
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 0.6rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
+/* Judul */
+h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
 
-    button {
-      margin-top: 1rem;
-      background-color: #34495e;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #1abc9c;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+}
 
-    button:hover {
-      background-color: #45a049;
-    }
+/* Label & Input Form */
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #1abc9c;
+  outline: none;
+}
+
+/* Tombol */
+button {
+  margin-top: 1.5rem;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #16a085;
+}
+
+/* Animasi */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
