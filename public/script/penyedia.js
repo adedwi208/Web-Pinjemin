@@ -67,11 +67,11 @@ window.tampilkanBarang = async function () {
               font-size: 14px;
               margin: 0 0 5px;
             }
-            .qty {
+            .qty, .price-display { /* Tetap ada untuk menampilkan harga */
               font-size: 13px;
               color: #666;
             }
-            .stok-input {
+            .stok-input { /* Hanya stok-input, price-input dihapus */
               width: 60px;
               padding: 4px;
               margin-top: 6px;
@@ -106,6 +106,7 @@ window.tampilkanBarang = async function () {
                   alert('Gagal memperbarui stok');
                 });
             }
+            // --- FUNGSI updateHarga DIHAPUS DARI SINI ---
           </script>
         </head>
         <body>
@@ -118,6 +119,8 @@ window.tampilkanBarang = async function () {
                 <div class="qty">Jumlah: ${i.jumlah}</div>
                 <input type="number" id="stok-${i.id}" class="stok-input" value="${i.jumlah}" min="0" />
                 <button class="update-btn" onclick="updateStok(${i.id})">Update Stok</button>
+
+                <div class="price-display">Harga: Rp. ${i.harga ? i.harga.toLocaleString('id-ID') : 'N/A'}</div>
               </div>
             `).join("")}
           </div>
@@ -138,10 +141,11 @@ window.tambahBarang = async function () {
   const name = document.getElementById("itemName").value.trim();
   const desc = document.getElementById("itemDesc").value.trim();
   const qty = document.getElementById("itemQty").value.trim();
+  const price = document.getElementById("itemPrice").value.trim(); // Tetap ambil harga dari input
   const imageInput = document.getElementById("itemImage");
 
-  if (!name || !desc || !qty || imageInput.files.length === 0) {
-    alert("Semua kolom termasuk foto harus diisi.");
+  if (!name || !desc || !qty || !price || imageInput.files.length === 0) { // Validasi harga tetap ada
+    alert("Semua kolom termasuk foto dan harga harus diisi.");
     return;
   }
 
@@ -155,6 +159,7 @@ window.tambahBarang = async function () {
   formData.append("nama_barang", name);
   formData.append("deskripsi", desc);
   formData.append("jumlah", qty);
+  formData.append("harga", price); // Tetap tambahkan harga ke form data
   formData.append("penyedia_id", penyedia_id);
   formData.append("foto", imageInput.files[0]);
 
@@ -177,6 +182,7 @@ window.tambahBarang = async function () {
       document.getElementById("itemName").value = "";
       document.getElementById("itemDesc").value = "";
       document.getElementById("itemQty").value = "";
+      document.getElementById("itemPrice").value = ""; // Bersihkan input harga
       document.getElementById("itemImage").value = "";
       await tampilkanBarang();
     } else {
@@ -195,7 +201,7 @@ function lihatPinjaman() {
     return;
   }
 
-  fetch(`/api/penyedia/pinjaman/${penyediaId}`) // Pastikan endpoint ini sesuai dengan route Anda
+  fetch(`/api/penyedia/pinjaman/${penyediaId}`)
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("barangContainer");
@@ -234,37 +240,6 @@ function lihatPinjaman() {
     .catch(err => {
       console.error("Gagal mengambil data pinjaman:", err);
       alert("Terjadi kesalahan saat mengambil data pinjaman.");
-    });
-}
-
-function updateStok(id) {
-  const jumlah = parseInt(document.getElementById(`stok-${id}`).value);
-
-  if (isNaN(jumlah) || jumlah < 0) {
-    alert("Jumlah stok tidak valid");
-    return;
-  }
-
-  fetch('http://localhost:3000/api/barang/update-stok/' + id, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ jumlah })
-  })
-    .then(async res => {
-      const contentType = res.headers.get("content-type");
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error("Gagal update: " + text);
-      }
-      return res.json();
-    })
-    .then(data => {
-      alert(data.message);
-      location.reload();
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Error saat update stok: " + err.message);
     });
 }
 

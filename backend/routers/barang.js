@@ -22,8 +22,8 @@ router.get('/', barangController.getAllBarang);
 
 router.get('/pinjaman/:penyedia_id', penyediaController.getBarangDipinjam);
 
+router.get('/:id', barangController.getBarangById);
+
 router.put('/update-stok/:id', barangController.updateStok);
-
-
 
 module.exports = router;

@@ -15,14 +15,12 @@
     <h3>Tambah Barang</h3>
     <input type="text" id="itemName" placeholder="Nama Barang" />
     <textarea id="itemDesc" placeholder="Deskripsi Barang"></textarea>
-    <input type="number" id="itemQty" placeholder="Jumlah Barang" />
+    <input type="number" id="itemQty" placeholder="Jumlah Barang" min="0" />
+    <input type="number" id="itemPrice" placeholder="Harga Barang" min="0" step="0.01" />
     <input type="file" id="itemImage" accept="image/*" />
     <button onclick="tambahBarang()">Tambah Barang</button>
     <button onclick="lihatPinjaman()">📋 Lihat Barang yang Dipinjam</button>
-    
-
     <button onclick="kembaliKeBeranda()">🏠 Beranda Utama</button>
-
     <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
