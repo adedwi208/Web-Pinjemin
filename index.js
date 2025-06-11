@@ -23,7 +23,7 @@ const penyediaRoutes = require('./backend/routers/penyedia');
 
 const PORT = process.env.PORT || 3000;
 
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('5 * * * * *', () => {
   // console.log('Tugas cron dipicu: ' + new Date().toLocaleTimeString());
   pinjamController.checkAndSendOverdueNotifications();
 });

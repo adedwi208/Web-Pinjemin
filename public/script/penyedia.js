@@ -215,27 +215,54 @@ function lihatPinjaman() {
         return;
       }
 
-      const html = `
-        <h3>Barang yang Dipinjam</h3>
-        <table border="1" cellspacing="0" cellpadding="6">
-          <tr>
-            <th>Nama Barang</th>
-            <th>Dipinjam oleh</th>
-            <th>Tanggal Mulai</th>
-            <th>Tanggal Selesai</th>
-          </tr>
-          ${data.map(item => `
+      const html = data.length ? `
+        <!DOCTYPE html>
+        <html lang="id">
+        <head>
+          <meta charset="UTF-8">
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 20px;
+              margin: 0;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+            }
+            th, td {
+              padding: 10px;
+              border: 1px solid #ccc;
+              text-align: left;
+            }
+            th {
+              background-color: #f2f2f2;
+            }
+          </style>
+        </head>
+        <body>
+          <h3>Barang yang Dipinjam</h3>
+          <table>
             <tr>
-              <td>${item.nama_barang}</td>
-              <td>${item.peminjam}</td>
-              <td>${item.tanggal_mulai}</td>
-              <td>${item.tanggal_selesai}</td>
+              <th>Nama Barang</th>
+              <th>Dipinjam oleh</th>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Selesai</th>
             </tr>
-          `).join('')}
-        </table>
-      `;
+            ${data.map(item => `
+              <tr>
+                <td>${item.nama_barang}</td>
+                <td>${item.peminjam}</td>
+                <td>${item.tanggal_mulai}</td>
+                <td>${item.tanggal_selesai}</td>
+              </tr>
+            `).join('')}
+          </table>
+        </body>
+        </html>
+      ` : "<p style='padding: 20px;'>Belum ada barang yang sedang dipinjam.</p>";
 
-      container.innerHTML = html;
+      document.getElementById("frameBarang").srcdoc = html;
     })
     .catch(err => {
       console.error("Gagal mengambil data pinjaman:", err);
